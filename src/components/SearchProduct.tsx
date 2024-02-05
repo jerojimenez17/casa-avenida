@@ -19,10 +19,10 @@ const SearchProduct = ({ handleSetSearch }: props) => {
   return (
     <TextField
       sx={{
-        maxWidth: "25%",
-        minWidth: "25%",
-        maxHeight: "2rem",
-        height: "2rem",
+        maxWidth: "20%",
+        minWidth: "20%",
+        maxHeight: "1.5rem",
+        height: "1.5rem",
         ml: 2,
         mb: 3,
       }}
