@@ -57,7 +57,7 @@ const ProductGrid = ({ products, openCart }: propsGrid) => {
       onRowSelectionModelChange={(ids) => {
         const selectedIDs = new Set(ids);
         products
-          .filter((row) => selectedIDs.has(row.id.toString()))
+          .filter((row) => selectedIDs.has(row.id))
           .map((row) => {
             addItem(row);
           });
