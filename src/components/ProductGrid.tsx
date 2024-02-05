@@ -15,8 +15,8 @@ const ProductGrid = ({ products, openCart }: propsGrid) => {
       field: "cod",
       headerName: "Codigo",
       headerClassName: "header-grid",
-      width: openCart ? 60 : 120,
-      minWidth: 60,
+      width: openCart ? 70 : 120,
+      minWidth: 70,
     },
     {
       field: "description",
@@ -46,6 +46,7 @@ const ProductGrid = ({ products, openCart }: propsGrid) => {
     <DataGrid
       sx={{
         height: "80vh",
+        width: "95%",
         boxShadow: 2,
       }}
       className="products-grid"
@@ -62,7 +63,7 @@ const ProductGrid = ({ products, openCart }: propsGrid) => {
           });
       }}
       initialState={{
-        pagination: { paginationModel: { pageSize: 5 } },
+        pagination: { paginationModel: { pageSize: 10 } },
       }}
     />
   );
