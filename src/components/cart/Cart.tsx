@@ -15,7 +15,7 @@ import PrinteableProducts from "../PrinteableProducts";
 import { CartContext } from "./context/CartContext";
 
 function Cart() {
-  const { cartState, removeAll } = useContext(CartContext);
+  const { cartState, removeAll, date } = useContext(CartContext);
 
   const handleDeleteAll = () => {
     removeAll();
@@ -34,7 +34,7 @@ function Cart() {
   return (
     <Paper
       className="itemCart"
-      sx={{ height: "80vh", width: "45vw", display: "flex", flexWrap: "wrap" }}
+      sx={{ height: "85vh", width: "45vw", display: "flex", flexWrap: "wrap" }}
     >
       <Box>
         <PrinteableProducts
@@ -70,6 +70,7 @@ function Cart() {
           <Tooltip title={"Imprimir"}>
             <IconButton
               onClick={() => {
+                date(new Date());
                 setPrint(!print);
               }}
               color="success"
