@@ -18,7 +18,7 @@ import { useReactToPrint } from "react-to-print";
 import Product from "../models/Product";
 import CartItems from "./cart/CartItems";
 import { CartContext } from "./cart/context/CartContext";
-import logo from "../../public/logo.png";
+import logo from "/logo.png";
 
 interface PrinteableProductsProps {
   edit: boolean;
