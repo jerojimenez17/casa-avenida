@@ -18,6 +18,8 @@ import { useReactToPrint } from "react-to-print";
 import Product from "../models/Product";
 import CartItems from "./cart/CartItems";
 import { CartContext } from "./cart/context/CartContext";
+import logo from "../../public/logo.png";
+
 interface PrinteableProductsProps {
   edit: boolean;
   reference?: MutableRefObject<null>;
@@ -39,7 +41,6 @@ const PrinteableProducts = ({
   products,
   setDocToChange,
 }: PrinteableProductsProps) => {
-  const [fecha, setFecha] = useState<Date>();
   const [discountState, setDiscountState] = useState(0);
 
   const { cartState, discount } = useContext(CartContext);
@@ -48,12 +49,6 @@ const PrinteableProducts = ({
     content: () => ref.current,
   });
   useEffect(() => {
-    const hoy = Date.now();
-    if (cartState.date !== undefined) {
-      setFecha(cartState.date);
-    } else {
-      setFecha(new Date(hoy));
-    }
     if (print && setPrint) {
       handlePrint();
       setPrint(!print);
@@ -77,19 +72,20 @@ const PrinteableProducts = ({
       <Box m={1} className="cart">
         <Box display="flex" flexDirection="column">
           <Box className="logo">
-            <Typography
+            {/* <Typography
               variant="h4"
               className="title-card"
               color="primary"
               ml={2}
             >
               Casa Avenida
-            </Typography>
-            {/* <img className="img-logo" alt="Jimenez Sanitarios" src={logo} /> */}
+            </Typography> */}
+            <img className="img-logo" alt="Casa Avenida" src={logo} />
           </Box>
           <Box className="date-container">
             <Typography variant="body1" className="date">
-              Fecha:{fecha?.toLocaleDateString()} {fecha?.toLocaleTimeString()}
+              Fecha:{cartState.date.toLocaleDateString()}{" "}
+              {cartState.date.toLocaleTimeString()}
             </Typography>
             {/* {cartState.CAE?.CAE !== "" && (
               <Typography
