@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -49,7 +47,7 @@ demo-simple-select-helper{
 }
 .img-logo{
   display:none;
-  width: 100%;
+  width: 70%;
   height:13vh;
 }
 .customer-container{
@@ -83,8 +81,6 @@ demo-simple-select-helper{
   min-height: auto;
   
 }
-.cart{
-}
 .cart-container{
   max-height: 55vh;
 }
@@ -113,7 +109,7 @@ demo-simple-select-helper{
     display: none;
   }
   .products-cart{
-    width: 100%;
+    width: 90vw;
   }
   .C{
     padding: 0.5rem 0.25rem 0.5rem 0.25rem;
