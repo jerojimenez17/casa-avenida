@@ -68,7 +68,7 @@ function App() {
                 handleTheme={handleTheme}
               />
               <Routes>
-                <Route path="/" element={<Products />} />
+                <Route path="/" element={<Products openCart={openCart} />} />
               </Routes>
             </CartProvider>
           </BrowserRouter>
