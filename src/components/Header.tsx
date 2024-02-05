@@ -72,7 +72,7 @@ export default function SearchAppBar({
               alignItems="center"
             >
               <Link
-                to="products"
+                to="/"
                 style={{ textDecoration: "none", color: "inherit" }}
                 onClick={() => {
                   handlePageChange("products");
@@ -97,17 +97,18 @@ export default function SearchAppBar({
             >
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
-                to="counts"
+                to="/"
                 onClick={() => {
                   handlePageChange("counts");
                 }}
               >
                 <Button
+                  disabled={true}
                   variant="text"
                   size="large"
                   color={page === "counts" ? "primary" : "inherit"}
                 >
-                  Cuentas
+                  Stock
                 </Button>
               </Link>
             </Box>
