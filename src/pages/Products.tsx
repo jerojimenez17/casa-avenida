@@ -10,7 +10,11 @@ import SearchProduct from "../components/SearchProduct";
 import { CartContext } from "../components/cart/context/CartContext";
 import React from "react";
 
-const Products = () => {
+interface ProductProps {
+  openCart: boolean;
+}
+
+const Products = ({ openCart }: ProductProps) => {
   const [search, setSearch] = useState<string>("");
   const [newGain, setNewGain] = useState(0);
   const [newIva, setNewIva] = useState(0);
@@ -18,12 +22,13 @@ const Products = () => {
   const [productsListName, setProductListName] = useState<string>("taladro");
   const { gain, iva, cartState } = React.useContext(CartContext);
   useEffect(() => {
+    setProducts([]);
     fetchProducts(productsListName, cartState.gain, cartState.iva).then(
       (products) => {
         setProducts(products);
       }
     );
-  }, [productsListName, gain, iva]);
+  }, [productsListName, cartState.gain, cartState.iva]);
 
   const handleKeyGainPress = (e: any) => {
     if (e.key === "Enter") {
@@ -45,7 +50,7 @@ const Products = () => {
       }}
     >
       <Box display="flex" flexDirection="column">
-        <Box sx={{ minHeight: "8vh", display: "flex" }}>
+        <Box sx={{ minHeight: "8vh", display: "flex", margin: 1 }}>
           <ListSelect
             handleSetListName={(name) => setProductListName(name)}
             listName={productsListName}
@@ -56,20 +61,22 @@ const Products = () => {
             }}
           />
           <TextField
-            sx={{ width: "4rem" }}
+            label="Ganacia"
+            sx={{ width: "4.5rem" }}
             placeholder={cartState.gain.toString()}
             onChange={(e) => setNewGain(Number(e.target.value))}
             onKeyDown={handleKeyGainPress}
           />
           <TextField
-            sx={{ width: "4rem" }}
+            label="IVA"
+            sx={{ width: "4.5rem" }}
             placeholder={cartState.iva.toString()}
             onChange={(e) => setNewIva(Number(e.target.value))}
             onKeyDown={handleKeyIvaPress}
           />
         </Box>
         <Grid container sx={{ margin: "1rem" }}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={openCart ? 6 : 12}>
             <ProductGrid
               products={products.filter((product) => {
                 return (
@@ -87,10 +94,15 @@ const Products = () => {
                     .includes(search.toLowerCase())
                 );
               })}
-              openCart={true}
+              openCart={openCart}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid
+            item
+            xs={openCart ? 12 : 0}
+            md={openCart ? 6 : 0}
+            hidden={!openCart}
+          >
             <Cart />
           </Grid>
         </Grid>
