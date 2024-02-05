@@ -100,6 +100,12 @@ const CartProvider = ({ children }: props) => {
       payload: gain,
     });
   };
+  const date = (date: Date) => {
+    dispatch({
+      type: "date",
+      payload: date,
+    });
+  };
   const clientName = (name: string) => {
     dispatch({
       type: "clientName",
@@ -162,6 +168,7 @@ const CartProvider = ({ children }: props) => {
     entrega: entrega,
     iva: iva,
     gain: gain,
+    date: date,
     nroAsociado: nroAsociado,
     setState: setState,
   };

@@ -18,6 +18,7 @@ type CartAction =
   | { type: "documentNumber"; payload: number }
   | { type: "entrega"; payload: number }
   | { type: "nroAsociado"; payload: number }
+  | { type: "date"; payload: Date }
   | { type: "iva"; payload: number }
   | { type: "gain"; payload: number }
   | { type: "clientName"; payload: string }
@@ -127,6 +128,11 @@ export const CartReducer = (
       return {
         ...state,
         totalWithDiscount: state.total - state.total * action.payload * 0.01,
+      };
+    case "date":
+      return {
+        ...state,
+        date: action.payload,
       };
     case "iva":
       return {
