@@ -65,7 +65,7 @@ const ListSelect = ({ handleSetListName, listName }: props) => {
         }
       >
         {lists.map((list) => (
-          <MenuItem value={list.replace(/\s/g, "").toLowerCase()}>
+          <MenuItem key={list} value={list.replace(/\s/g, "").toLowerCase()}>
             {list}
           </MenuItem>
         ))}
