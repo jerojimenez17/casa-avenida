@@ -25,6 +25,8 @@ const lists = [
   "Bairespack Varas",
   "Bairespack PasaHilos",
   "Belmo",
+  "Casa Avenida",
+  "Roura",
 ];
 const ListSelect = ({ handleSetListName, listName }: props) => {
   return (
