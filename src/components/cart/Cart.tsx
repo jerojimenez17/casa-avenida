@@ -1,14 +1,7 @@
 import { useContext, useState } from "react";
 // import { CartContext } from "./context/CartContext";
 
-import {
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  Paper,
-  Tooltip,
-} from "@mui/material";
+import { Box, Divider, IconButton, Paper, Tooltip } from "@mui/material";
 import PrintIcon from "@mui/icons-material/Print";
 import { DeleteSharp, EditSharp } from "@mui/icons-material";
 import PrinteableProducts from "../PrinteableProducts";
@@ -29,7 +22,6 @@ function Cart() {
   // },[handlePrint]);
 
   const [edit, setEdit] = useState<boolean>(false);
-  const [openModal, setOpenModal] = useState(false);
 
   return (
     <Paper
@@ -49,13 +41,7 @@ function Cart() {
           {/* <Button color="success" variant="contained" onClick={handleSaveSale}>
             Vender
           </Button> */}
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => setOpenModal(!openModal)}
-          >
-            A Cuenta
-          </Button>
+
           <Tooltip title={"Vaciar"}>
             <IconButton onClick={handleDeleteAll} color="error">
               <DeleteSharp />

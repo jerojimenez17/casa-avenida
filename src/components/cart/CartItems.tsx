@@ -27,6 +27,7 @@ const CartItems = ({ edit, products }: props) => {
   const { addUnit, removeUnit, removeItem, changePrice, changeAmount } =
     useContext(CartContext);
   const [editPrice, setEditPrice] = useState(0);
+  const [editUnit, setEditUnit] = useState(0);
   const handleAddItem = (producto: Product) => {
     addUnit(producto);
   };
@@ -48,12 +49,11 @@ const CartItems = ({ edit, products }: props) => {
     }
   };
   const handleEditAmount = (
-    e: KeyboardEvent<HTMLInputElement | HTMLDivElement>,
+    e: React.KeyboardEvent<HTMLDivElement>,
     product: Product
   ) => {
     if (e.key === "Enter") {
-      console.log(e);
-      product.amount = 1;
+      product.amount = editUnit;
       changeAmount(product);
     }
   };
@@ -84,6 +84,7 @@ const CartItems = ({ edit, products }: props) => {
                   size="small"
                   className="input-edit-amount"
                   placeholder={producto.amount.toString()}
+                  onChange={(e) => setEditUnit(Number(e.target.value))}
                   onKeyDown={(e) => {
                     handleEditAmount(e, producto);
                   }}
