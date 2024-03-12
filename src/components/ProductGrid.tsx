@@ -45,7 +45,7 @@ const ProductGrid = ({ products, openCart }: propsGrid) => {
   return (
     <DataGrid
       sx={{
-        height: "80vh",
+        height: "75vh",
         width: "95%",
         boxShadow: 2,
       }}
