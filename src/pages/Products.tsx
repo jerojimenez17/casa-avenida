@@ -50,7 +50,7 @@ const Products = ({ openCart }: ProductProps) => {
       }}
     >
       <Box display="flex" flexDirection="column">
-        <Box sx={{ minHeight: "8vh", display: "flex", margin: 1 }}>
+        <Box sx={{ height: "6vh", display: "flex", margin: 1 }}>
           <ListSelect
             handleSetListName={(name) => setProductListName(name)}
             listName={productsListName}
