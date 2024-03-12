@@ -1,6 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getFirestore,
+  runTransaction,
+} from "firebase/firestore";
+import Product from "../models/Product";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,3 +25,35 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+
+export const addProductsToStock = async (newProducts: Product[]) => {
+  const docRef = doc(db, "stock", "5IA3rZKyrYdQIS1dU1m4");
+  let produ: Product[] = [];
+  try {
+    await runTransaction(db, async (transaction) => {
+      const sfDoc = await transaction.get(docRef);
+      if (!sfDoc.exists()) {
+        throw "Document doesn't exist";
+      }
+      produ = sfDoc.data().products;
+      console.log(produ);
+      newProducts.forEach((newProduct) => {
+        const find = produ.find(
+          (produ) => produ.description === newProduct.description
+        );
+        if (find) {
+          find.amount += Number(newProduct.amount);
+          transaction.update(docRef, {
+            products: produ,
+          });
+        } else {
+          transaction.update(docRef, {
+            products: arrayUnion(newProduct),
+          });
+        }
+      });
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
