@@ -9,6 +9,7 @@ import {
   Box,
   TableContainer,
   Paper,
+  TableBody,
 } from "@mui/material";
 import React, { KeyboardEvent, useContext, useState } from "react";
 import { CartContext } from "./context/CartContext";
@@ -72,82 +73,84 @@ const CartItems = ({ edit, products }: props) => {
           </TableRow>
         </TableHead>
 
-        {products.map((producto: Product) => (
-          <TableRow key={producto.id} className="cart-row">
-            <TableCell className="description">
-              {producto.description}
-            </TableCell>
-            <TableCell className="marca">{producto.brand}</TableCell>
-            {edit ? (
-              <TableCell>
-                <TextField
-                  size="small"
-                  className="input-edit-amount"
-                  placeholder={producto.amount.toString()}
-                  onChange={(e) => setEditUnit(Number(e.target.value))}
-                  onKeyDown={(e) => {
-                    handleEditAmount(e, producto);
-                  }}
-                />
+        <TableBody>
+          {products.map((producto: Product) => (
+            <TableRow key={producto.id} className="cart-row">
+              <TableCell className="description">
+                {producto.description}
               </TableCell>
-            ) : (
-              <TableCell className="cantidad"> {producto.amount}</TableCell>
-            )}
-            {edit ? (
-              <TableCell>
-                <TextField
-                  size="small"
-                  className="input-edit-price"
-                  onChange={(e) => setEditPrice(Number(e.target.value))}
-                  onKeyDown={(e) => {
-                    handleEditPrice(e, producto);
-                  }}
-                  placeholder={"$" + Number(producto.price).toFixed()}
-                />
-              </TableCell>
-            ) : (
-              <TableCell>{"$" + Number(producto.price).toFixed()}</TableCell>
-            )}
-            <TableCell className="SubTotal">
-              {" "}
-              ${(producto.amount * producto.price).toFixed()}
-            </TableCell>
-            <TableCell>
-              {edit && (
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="space-around"
-                >
-                  <IconButton
+              <TableCell className="marca">{producto.brand}</TableCell>
+              {edit ? (
+                <TableCell>
+                  <TextField
                     size="small"
-                    color="success"
-                    aria-label="addItem"
-                    onClick={() => handleAddItem(producto)}
-                  >
-                    <AddCircle />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    color="primary"
-                    aria-label="removeUnit"
-                    onClick={() => handleRemoveUnit(producto)}
-                  >
-                    <RemoveCircle />
-                  </IconButton>
-                  <IconButton
-                    size="small"
-                    color="error"
-                    aria-label="removeItem"
-                    onClick={() => handleRemoveItem(producto)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
+                    className="input-edit-amount"
+                    placeholder={producto.amount.toString()}
+                    onChange={(e) => setEditUnit(Number(e.target.value))}
+                    onKeyDown={(e) => {
+                      handleEditAmount(e, producto);
+                    }}
+                  />
+                </TableCell>
+              ) : (
+                <TableCell className="cantidad"> {producto.amount}</TableCell>
               )}
-            </TableCell>
-          </TableRow>
-        ))}
+              {edit ? (
+                <TableCell>
+                  <TextField
+                    size="small"
+                    className="input-edit-price"
+                    onChange={(e) => setEditPrice(Number(e.target.value))}
+                    onKeyDown={(e) => {
+                      handleEditPrice(e, producto);
+                    }}
+                    placeholder={"$" + Number(producto.price).toFixed()}
+                  />
+                </TableCell>
+              ) : (
+                <TableCell>{"$" + Number(producto.price).toFixed()}</TableCell>
+              )}
+              <TableCell className="SubTotal">
+                {" "}
+                ${(producto.amount * producto.price).toFixed()}
+              </TableCell>
+              <TableCell>
+                {edit && (
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="space-around"
+                  >
+                    <IconButton
+                      size="small"
+                      color="success"
+                      aria-label="addItem"
+                      onClick={() => handleAddItem(producto)}
+                    >
+                      <AddCircle />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      color="primary"
+                      aria-label="removeUnit"
+                      onClick={() => handleRemoveUnit(producto)}
+                    >
+                      <RemoveCircle />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      color="error"
+                      aria-label="removeItem"
+                      onClick={() => handleRemoveItem(producto)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </TableContainer>
   );
