@@ -1,21 +1,33 @@
 import { useContext, useState } from "react";
 // import { CartContext } from "./context/CartContext";
 
-import { Box, Divider, IconButton, Paper, Tooltip } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Paper,
+  Tooltip,
+} from "@mui/material";
 import PrintIcon from "@mui/icons-material/Print";
 import { DeleteSharp, EditSharp } from "@mui/icons-material";
 import PrinteableProducts from "../PrinteableProducts";
 import { CartContext } from "./context/CartContext";
-
+import { addProductsToStock } from "../../services/Firebase";
 function Cart() {
   const { cartState, removeAll, date } = useContext(CartContext);
+  const [print, setPrint] = useState(false);
 
   const handleDeleteAll = () => {
     removeAll();
   };
-  const [print, setPrint] = useState(false);
 
+  const handleSaveSale = async () => {
+    await addProductsToStock(cartState.products);
+    handleDeleteAll();
+  };
   // useEffect(() => {
+
   //   setTimeout(() =>{
   //   clientName("");}
   //   ,500);
@@ -24,23 +36,35 @@ function Cart() {
   const [edit, setEdit] = useState<boolean>(false);
 
   return (
-    <Paper
-      className="itemCart"
-      sx={{ height: "85vh", width: "45vw", display: "flex", flexWrap: "wrap" }}
-    >
-      <Box>
+    <Paper>
+      <Box
+        display="flex"
+        flexDirection="column"
+        height="100%"
+        width="100%"
+        flexWrap="wrap"
+      >
         <PrinteableProducts
           print={print}
           edit={edit}
           products={cartState.products}
-          client={"jero"}
           setPrint={setPrint}
         />
         <Divider />
-        <Box display="flex" justifyContent="space-around" alignItems="center">
-          {/* <Button color="success" variant="contained" onClick={handleSaveSale}>
+        <Box
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+          p={0.2}
+        >
+          <Button
+            color="success"
+            variant="contained"
+            size="small"
+            onClick={handleSaveSale}
+          >
             Vender
-          </Button> */}
+          </Button>
 
           <Tooltip title={"Vaciar"}>
             <IconButton onClick={handleDeleteAll} color="error">
